@@ -51,7 +51,7 @@ USAGE:
 OPTIONS:
   -h: help
   -t: test: bash tfref_test
-  -f: open_read_file_line_up: tfref -e $file_path $line
+  -f: open_read_file_line_up: tfref -f $file_path $line
 
 SUPPORTED TYPE:
   aws, datadog, data_datadog, data_aws
@@ -61,7 +61,7 @@ EXAMPLE:
   tfref datadog_monitor
   tfref data.aws_instance
   tfref data.datadog_api_key
-  tfref -e "./ec2.tf" 20
+  tfref -f "./ec2.tf" 20
 
 EOF
   exit 0

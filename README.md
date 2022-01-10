@@ -1,11 +1,13 @@
 # tfref
 
-Open terreaform reference easily.
+Open terreaform documentation easily.
 
 ### install
 
 ```bash
-sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref > /usr/local/bin/tfref
+install_path=/usr/local/bin/tfref
+sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref > "$install_path"
+chmod +x "$install_path"
 ```
 
 ### usage
@@ -16,7 +18,8 @@ USAGE:
 
 OPTIONS:
   -h: help
-  -f: open_read_file_line_up: tfref -e $file_path $line
+  -t: test: bash tfref_test
+  -f: open_read_file_line_up: tfref -f $file_path $line
 
 SUPPORTED TYPE:
   aws, datadog, data_datadog, data_aws
@@ -26,7 +29,7 @@ EXAMPLE:
   tfref datadog_monitor
   tfref data.aws_instance
   tfref data.datadog_api_key
-  tfref -e "./ec2.tf" 20
+  tfref -f "./ec2.tf" 20
 ```
 
 ### vim
