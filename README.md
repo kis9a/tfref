@@ -2,6 +2,12 @@
 
 Open terreaform reference easily.
 
+### install
+
+```bash
+sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref > /usr/local/bin/tfref
+```
+
 ### usage
 
 ```
@@ -23,12 +29,6 @@ EXAMPLE:
   tfref -e "./ec2.tf" 20
 ```
 
-### install
-
-```bash
-sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref > /usr/local/bin/tfref
-```
-
 ### vim
 
 ```bash
@@ -40,4 +40,17 @@ function! s:tfref()
 endfunction
 
 nnoremap <silent> <Leader>tf :call <SID>tfref()<CR>
+```
+
+### dev
+
+linter: https://github.com/koalaman/shellcheck  
+formatter: https://github.com/mvdan/sh
+
+### test
+
+```bash
+git clone https://github.com/kis9a/tfref
+cd tfref
+./tfref -t
 ```

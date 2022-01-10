@@ -1,0 +1,97 @@
+#!/bin/bash
+# expected $(source) by ./tfref
+
+# helper
+assert_equal() {
+  if [ "$1" != "$2" ]; then
+    echo "expected: $1"
+    echo "actual:   $2"
+    return 1
+  fi
+}
+
+assert_range() {
+  if [ "$1" -lt "$2" ]; then
+    echo "expected: $1"
+    echo "greater than: $2"
+    return 1
+  fi
+  if [ "$1" -gt "$3" ]; then
+    echo "expected: $1"
+    echo "less than: $3"
+    return 1
+  fi
+}
+
+test_err() {
+  echo -e "${red}❌${cf} $1" 1>&2
+  exit 1
+}
+
+test_suc() {
+  echo -e "${green}✓ ${cf} $1" 1>&2
+}
+
+get_url_status_code() {
+  cat <<<"$(curl -LI "$1" -o /dev/null -w '%{http_code}\n' -s)"
+}
+
+# test
+testing_run() {
+  # test_get_open_url
+  test_get_open_url "aws_instance" "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+
+  test_get_open_url "aws_instance.some" "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+
+  test_get_open_url "data.aws_instance" "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/instance"
+
+  test_get_open_url "datadog_monitor" "https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/monitor"
+
+  test_get_open_url "data.datadog_api_key" "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/api_key"
+
+  # test_read_line_up
+  test_read_line_up "tfref_test_file.tf" 0 ""
+
+  test_read_line_up "tfref_test_file.tf" 9 "aws_instance"
+
+  test_read_line_up "tfref_test_file.tf" 15 "data.aws_ecs_task_definition"
+
+  test_read_line_up "tfref_test_file.tf" 17 "datadog_monitor"
+
+  test_read_line_up "tfref_test_file.tf" 22 "data.datadog_api_key"
+
+  # test_get_open_url_status_code
+  test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" 200
+
+  test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/instance" 200
+
+  test_get_open_url_status_code "https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/monitor" 200
+
+  test_get_open_url_status_code "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/api_key" 200
+}
+
+test_get_open_url() {
+  if assert_equal "$(get_open_url "$1")" "$2"; then
+    test_suc "test_get_open_url: $1"
+  else
+    test_err "test_get_open_url: failed $1"
+  fi
+}
+
+test_read_line_up() {
+  if assert_equal "$(read_file_line_up "$1" "$2")" "$3"; then
+    test_suc "test_read_line_up: $1:$2"
+  else
+    test_err "test_read_line_up: failed $1"
+  fi
+}
+
+test_get_open_url_status_code() {
+  if assert_equal "$(get_url_status_code "$1")" "$2"; then
+    test_suc "test_get_open_url_status_code: $1:$2"
+  else
+    test_err "test_get_open_url_status_code: failed $1"
+  fi
+}
+
+testing_run "$@"
