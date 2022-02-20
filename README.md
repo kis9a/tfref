@@ -1,8 +1,8 @@
 # tfref
 
-Open terreaform documentation easily.
+Open terraform documentation easily.
 
-### install
+### Installation
 
 ```bash
 install_path=/usr/local/bin/tfref
@@ -10,7 +10,7 @@ sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref > "$instal
 chmod +x "$install_path"
 ```
 
-### usage
+### Usage
 
 ```
 USAGE:
@@ -45,15 +45,14 @@ endfunction
 nnoremap <silent> <Leader>tf :call <SID>tfref()<CR>
 ```
 
-### dev
+### Development
 
 linter: https://github.com/koalaman/shellcheck  
 formatter: https://github.com/mvdan/sh
 
-### test
+### Testing
 
 ```bash
 git clone https://github.com/kis9a/tfref
-cd tfref
-./tfref -t
+cd tfref ./tfref -t
 ```
