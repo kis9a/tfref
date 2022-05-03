@@ -2,15 +2,14 @@
 
 Open terraform documentation easily.
 
-### Installation
+## Installation
 
-```bash
-install_path=/usr/local/bin/tfref
-sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref > "$install_path"
-chmod +x "$install_path"
+```
+sudo curl -s https://raw.githubusercontent.com/kis9a/tfref/main/tfref >/usr/local/bin/tfref
+chmod +x /usr/local/bin/tfref
 ```
 
-### Usage
+## Usage
 
 ```
 USAGE:
@@ -45,14 +44,13 @@ endfunction
 nnoremap <silent> <Leader>tf :call <SID>tfref()<CR>
 ```
 
-### Development
+## Devtools
 
-linter: https://github.com/koalaman/shellcheck  
-formatter: https://github.com/mvdan/sh
+**Style guide**
 
-### Testing
+> Indentation
+> Indent 2 spaces. No tabs. Use blank lines between blocks to improve readability. Indentation is two spaces. Whatever you do, don’t use tabs. For existing files, stay faithful to the existing indentation.
+> <https://google.github.io/styleguide/shellguide.html>
 
-```bash
-git clone https://github.com/kis9a/tfref
-cd tfref ./tfref -t
-```
+Linter: [GitHub - koalaman/shellcheck](https://github.com/koalaman/shellcheck)  
+Formatter: [GitHub - mvdan/sh](https://github.com/mvdan/sh)

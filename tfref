@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# --- template --- {{{
 readonly cf="\\033[0m"
 readonly red="\\033[0;31m"
 readonly green="\\033[0;32m"
@@ -40,7 +39,6 @@ showdate() {
 cleanup() {
   info "cleanup.."
 }
-#}}}
 
 show_help() {
   cat <<'EOF'
@@ -77,10 +75,18 @@ fix_open_arg() {
 
 get_open_cmd() {
   case "$(uname | tr "[:lower:]" "[:upper:]")" in
-  *'linux'*) echo 'xdg-open' ;;
-  *'bsd'*) echo 'xdg-open' ;;
-  *'darwin'*) echo 'open' ;;
-  *) echo 'open' ;;
+    *'linux'*)
+      echo 'xdg-open'
+      ;;
+    *'bsd'*)
+      echo 'xdg-open'
+      ;;
+    *'darwin'*)
+      echo 'open'
+      ;;
+    *)
+      echo 'open'
+      ;;
   esac
 }
 
@@ -107,21 +113,21 @@ get_open_url() {
   type="$(get_type "$1")"
   arg="$(fix_open_arg "$1" "$type")"
   case $type in
-  "aws")
-    echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/${arg//aws_/}"
-    ;;
-  "datadog")
-    echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/${arg//datadog_/}"
-    ;;
-  "data_aws")
-    echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/${arg//data.aws_/}"
-    ;;
-  "data_datadog")
-    echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/${arg//data.datadog_/}"
-    ;;
-  "*")
-    err "not supported type"
-    ;;
+    "aws")
+      echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/${arg//aws_/}"
+      ;;
+    "datadog")
+      echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/${arg//datadog_/}"
+      ;;
+    "data_aws")
+      echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/${arg//data.aws_/}"
+      ;;
+    "data_datadog")
+      echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/${arg//data.datadog_/}"
+      ;;
+    "*")
+      err "not supported type"
+      ;;
   esac
 }
 
@@ -195,33 +201,33 @@ get_type() {
 # run
 while getopts ":hft" o; do
   case "${o}" in
-  h)
-    show_help
-    exit 0
-    ;;
-  t)
-    if [ -f "tfref_test" ]; then
-      info "testing"
-      # shellcheck disable=SC1091
-      . "tfref_test"
-    else
-      err "tfref_test is not found"
-    fi
-    exit 0
-    ;;
-  f)
-    if [[ "$#" -eq 3 && "$1" == "-f" ]]; then
-      open_read_file_line_up "$1" "$2" "$3"
-    else
+    h)
       show_help
-    fi
-    exit 0
-    ;;
-  *)
-    err "invalid option"
-    show_help
-    exit 1
-    ;;
+      exit 0
+      ;;
+    t)
+      if [ -f "tfref_test" ]; then
+        info "testing"
+        # shellcheck disable=SC1091
+        . "tfref_test"
+      else
+        err "tfref_test is not found"
+      fi
+      exit 0
+      ;;
+    f)
+      if [[ "$#" -eq 3 && "$1" == "-f" ]]; then
+        open_read_file_line_up "$1" "$2" "$3"
+      else
+        show_help
+      fi
+      exit 0
+      ;;
+    *)
+      err "invalid option"
+      show_help
+      exit 1
+      ;;
   esac
 done
 
