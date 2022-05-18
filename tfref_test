@@ -53,6 +53,10 @@ testing_run() {
 
   test_get_open_url "onepassword_item" "https://registry.terraform.io/providers/1Password/onepassword/latest/docs/resources/item"
 
+  test_get_open_url "data.github_collaborators" "https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/collaborators"
+
+  test_get_open_url "github_team_membership" "https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership"
+
   # test_read_line_up
   test_read_line_up "tfref_test_file.tf" 0 ""
 
@@ -67,6 +71,10 @@ testing_run() {
   test_read_line_up "tfref_test_file.tf" 25 "data.onepassword_vault"
 
   test_read_line_up "tfref_test_file.tf" 34 "onepassword_item"
+
+  test_read_line_up "tfref_test_file.tf" 36 "github_membership"
+
+  test_read_line_up "tfref_test_file.tf" 41 "data.github_collaborators"
 
   # test_get_open_url_status_code
   test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" 200

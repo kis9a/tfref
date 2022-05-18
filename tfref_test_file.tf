@@ -31,3 +31,13 @@ resource "onepassword_item" "login" {
   category = "login"
   password = "password"
 }
+
+resource "github_membership" "membership_for_some_user" {
+  username = "SomeUser"
+  role     = "member"
+}
+
+data "github_collaborators" "test" {
+  owner      = "example_owner"
+  repository = "example_repository"
+}

@@ -21,7 +21,10 @@ OPTIONS:
   -f: open_read_file_line_up: tfref -f $file_path $line
 
 SUPPORTED TYPE:
-  aws, datadog, data_datadog, data_aws, onepassword, data_onepassword
+  aws, data_aws
+  datadog, data_datadog
+  onepassword, data_onepassword
+  github, data_github
 
 EXAMPLE:
   tfref aws_instance

@@ -52,7 +52,10 @@ OPTIONS:
   -f: open_read_file_line_up: tfref -f $file_path $line
 
 SUPPORTED TYPE:
-  aws, datadog, data_datadog, data_aws, onepassword, data_onepassword
+  aws, data_aws
+  datadog, data_datadog
+  onepassword, data_onepassword
+  github, data_github
 
 EXAMPLE:
   tfref aws_instance
@@ -122,6 +125,9 @@ get_open_url() {
     "onepassword")
       echo "https://registry.terraform.io/providers/1Password/onepassword/latest/docs/resources/${arg//onepassword_/}"
       ;;
+    "github")
+      echo "https://registry.terraform.io/providers/integrations/github/latest/docs/resources/${arg//github_/}"
+      ;;
     "data_aws")
       echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/${arg//data.aws_/}"
       ;;
@@ -130,6 +136,9 @@ get_open_url() {
       ;;
     "data_onepassword")
       echo "https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/${arg//data.onepassword_/}"
+      ;;
+    "data_github")
+      echo "https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/${arg//data.github_/}"
       ;;
     "*")
       err "not supported type"
@@ -189,6 +198,8 @@ get_data_type() {
     echo "data_datadog"
   elif [[ "$1" =~ ^data\.onepassword_.* ]]; then
     echo "data_onepassword"
+  elif [[ "$1" =~ ^data\.github_.* ]]; then
+    echo "data_github"
   else
     err "not supported: $1"
   fi
@@ -203,6 +214,8 @@ get_type() {
     echo "datadog"
   elif [[ "$1" =~ ^onepassword_.* ]]; then
     echo "onepassword"
+  elif [[ "$1" =~ ^github_.* ]]; then
+    echo "github"
   else
     err "not supported type"
   fi
