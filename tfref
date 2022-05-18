@@ -53,6 +53,7 @@ OPTIONS:
 
 SUPPORTED TYPE:
   aws, data_aws
+  azurerm, data_azurerm
   datadog, data_datadog
   onepassword, data_onepassword
   github, data_github
@@ -119,6 +120,9 @@ get_open_url() {
     "aws")
       echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/${arg//aws_/}"
       ;;
+    "azurerm")
+      echo "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/${arg//azurerm_/}"
+      ;;
     "datadog")
       echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/${arg//datadog_/}"
       ;;
@@ -130,6 +134,9 @@ get_open_url() {
       ;;
     "data_aws")
       echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/${arg//data.aws_/}"
+      ;;
+    "data_azurerm")
+      echo "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/${arg//data.azurerm_/}"
       ;;
     "data_datadog")
       echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/${arg//data.datadog_/}"
@@ -182,9 +189,9 @@ read_file_line_up() {
 }
 
 get_line_type() {
-  if [[ "$1" =~ ^resource.* ]]; then
+  if [[ "$1" =~ ^resource[[:space:]].* ]]; then
     echo "resource"
-  elif [[ "$1" =~ ^data.* ]]; then
+  elif [[ "$1" =~ ^data[[:space:]].* ]]; then
     echo "data"
   else
     echo "not-specified"
@@ -200,6 +207,8 @@ get_data_type() {
     echo "data_onepassword"
   elif [[ "$1" =~ ^data\.github_.* ]]; then
     echo "data_github"
+  elif [[ "$1" =~ ^data\.azurerm_.* ]]; then
+    echo "data_azurerm"
   else
     err "not supported: $1"
   fi
@@ -216,6 +225,8 @@ get_type() {
     echo "onepassword"
   elif [[ "$1" =~ ^github_.* ]]; then
     echo "github"
+  elif [[ "$1" =~ ^azurerm_.* ]]; then
+    echo "azurerm"
   else
     err "not supported type"
   fi

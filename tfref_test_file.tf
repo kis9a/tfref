@@ -41,3 +41,17 @@ data "github_collaborators" "test" {
   owner      = "example_owner"
   repository = "example_repository"
 }
+
+data "azurerm_aadb2c_directory" "example" {
+  resource_group_name = "example-rg"
+  domain_name         = "exampleb2ctenant.onmicrosoft.com"
+}
+
+resource "azurerm_aadb2c_directory" "example" {
+  country_code            = "US"
+  data_residency_location = "United States"
+  display_name            = "example-b2c-tenant"
+  domain_name             = "exampleb2ctenant.onmicrosoft.com"
+  resource_group_name     = "example-rg"
+  sku_name                = "PremiumP1"
+}

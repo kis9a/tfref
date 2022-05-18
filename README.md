@@ -22,6 +22,7 @@ OPTIONS:
 
 SUPPORTED TYPE:
   aws, data_aws
+  azurerm, data_azurerm
   datadog, data_datadog
   onepassword, data_onepassword
   github, data_github

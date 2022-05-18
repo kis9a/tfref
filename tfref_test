@@ -57,6 +57,10 @@ testing_run() {
 
   test_get_open_url "github_team_membership" "https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership"
 
+  test_get_open_url "data.azurerm_aadb2c_directory" "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/aadb2c_directory"
+
+  test_get_open_url "azurerm_aadb2c_directory" "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/aadb2c_directory"
+
   # test_read_line_up
   test_read_line_up "tfref_test_file.tf" 0 ""
 
@@ -75,6 +79,10 @@ testing_run() {
   test_read_line_up "tfref_test_file.tf" 36 "github_membership"
 
   test_read_line_up "tfref_test_file.tf" 41 "data.github_collaborators"
+
+  test_read_line_up "tfref_test_file.tf" 47 "data.azurerm_aadb2c_directory"
+
+  test_read_line_up "tfref_test_file.tf" 52 "azurerm_aadb2c_directory"
 
   # test_get_open_url_status_code
   test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" 200
