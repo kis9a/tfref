@@ -61,6 +61,10 @@ testing_run() {
 
   test_get_open_url "azurerm_aadb2c_directory" "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/aadb2c_directory"
 
+  test_get_open_url "data.kubernetes_all_namespaces" "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/all_namespaces"
+
+  test_get_open_url "kubernetes_pod" "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/pod"
+
   # test_read_line_up
   test_read_line_up "tfref_test_file.tf" 0 ""
 
@@ -83,6 +87,10 @@ testing_run() {
   test_read_line_up "tfref_test_file.tf" 47 "data.azurerm_aadb2c_directory"
 
   test_read_line_up "tfref_test_file.tf" 52 "azurerm_aadb2c_directory"
+
+  test_read_line_up "tfref_test_file.tf" 68 "kubernetes_pod"
+
+  test_read_line_up "tfref_test_file.tf" 70 "data.kubernetes_all_namespaces"
 
   # test_get_open_url_status_code
   test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" 200

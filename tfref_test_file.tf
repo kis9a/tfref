@@ -55,3 +55,16 @@ resource "azurerm_aadb2c_directory" "example" {
   resource_group_name     = "example-rg"
   sku_name                = "PremiumP1"
 }
+
+resource "kubernetes_pod" "test" {
+  metadata {
+    name = "terraform-example"
+  }
+
+  spec {
+    container {
+    }
+  }
+}
+
+data "kubernetes_all_namespaces" "allns" {}

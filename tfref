@@ -54,6 +54,7 @@ OPTIONS:
 SUPPORTED TYPE:
   aws, data_aws
   azurerm, data_azurerm
+  kubernetes, data_kubernetes
   datadog, data_datadog
   onepassword, data_onepassword
   github, data_github
@@ -123,6 +124,9 @@ get_open_url() {
     "azurerm")
       echo "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/${arg//azurerm_/}"
       ;;
+    "kubernetes")
+      echo "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/${arg//kubernetes_/}"
+      ;;
     "datadog")
       echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/${arg//datadog_/}"
       ;;
@@ -137,6 +141,9 @@ get_open_url() {
       ;;
     "data_azurerm")
       echo "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/${arg//data.azurerm_/}"
+      ;;
+    "data_kubernetes")
+      echo "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/${arg//data.kubernetes_/}"
       ;;
     "data_datadog")
       echo "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/${arg//data.datadog_/}"
@@ -209,6 +216,8 @@ get_data_type() {
     echo "data_github"
   elif [[ "$1" =~ ^data\.azurerm_.* ]]; then
     echo "data_azurerm"
+  elif [[ "$1" =~ ^data\.kubernetes.* ]]; then
+    echo "data_kubernetes"
   else
     err "not supported: $1"
   fi
@@ -227,6 +236,8 @@ get_type() {
     echo "github"
   elif [[ "$1" =~ ^azurerm_.* ]]; then
     echo "azurerm"
+  elif [[ "$1" =~ ^kubernetes_.* ]]; then
+    echo "kubernetes"
   else
     err "not supported type"
   fi
