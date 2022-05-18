@@ -53,6 +53,7 @@ OPTIONS:
 
 SUPPORTED TYPE:
   aws, data_aws
+  google, data_google
   azurerm, data_azurerm
   kubernetes, data_kubernetes
   datadog, data_datadog
@@ -121,6 +122,9 @@ get_open_url() {
     "aws")
       echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/${arg//aws_/}"
       ;;
+    "google")
+      echo "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/${arg//google_/}"
+      ;;
     "azurerm")
       echo "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/${arg//azurerm_/}"
       ;;
@@ -138,6 +142,9 @@ get_open_url() {
       ;;
     "data_aws")
       echo "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/${arg//data.aws_/}"
+      ;;
+    "data_google")
+      echo "https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/${arg//data.google_/}"
       ;;
     "data_azurerm")
       echo "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/${arg//data.azurerm_/}"
@@ -218,6 +225,8 @@ get_data_type() {
     echo "data_azurerm"
   elif [[ "$1" =~ ^data\.kubernetes.* ]]; then
     echo "data_kubernetes"
+  elif [[ "$1" =~ ^data\.google.* ]]; then
+    echo "data_google"
   else
     err "not supported: $1"
   fi
@@ -238,6 +247,8 @@ get_type() {
     echo "azurerm"
   elif [[ "$1" =~ ^kubernetes_.* ]]; then
     echo "kubernetes"
+  elif [[ "$1" =~ ^google_.* ]]; then
+    echo "google"
   else
     err "not supported type"
   fi

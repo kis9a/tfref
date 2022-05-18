@@ -22,6 +22,7 @@ OPTIONS:
 
 SUPPORTED TYPE:
   aws, data_aws
+  google, data_google
   azurerm, data_azurerm
   kubernetes, data_kubernetes
   datadog, data_datadog

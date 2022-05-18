@@ -68,3 +68,13 @@ resource "kubernetes_pod" "test" {
 }
 
 data "kubernetes_all_namespaces" "allns" {}
+
+resource "google_api_gateway_api" "api" {
+  provider = google-beta
+  api_id = "api"
+}
+
+data "google_cloud_run_service" "run-service" {
+  name = "my-service"
+  location = "us-central1"
+}

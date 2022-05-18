@@ -65,6 +65,10 @@ testing_run() {
 
   test_get_open_url "kubernetes_pod" "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/pod"
 
+  test_get_open_url "data.google_cloud_run_service" "https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/cloud_run_service"
+
+  test_get_open_url "google_api_gateway_api" "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/api_gateway_api"
+
   # test_read_line_up
   test_read_line_up "tfref_test_file.tf" 0 ""
 
@@ -92,6 +96,9 @@ testing_run() {
 
   test_read_line_up "tfref_test_file.tf" 70 "data.kubernetes_all_namespaces"
 
+  test_read_line_up "tfref_test_file.tf" 73 "google_api_gateway_api"
+
+  test_read_line_up "tfref_test_file.tf" 78 "data.google_cloud_run_service"
   # test_get_open_url_status_code
   test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" 200
 
