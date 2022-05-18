@@ -49,6 +49,10 @@ testing_run() {
 
   test_get_open_url "data.datadog_api_key" "https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/api_key"
 
+  test_get_open_url "data.onepassword_vault" "https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/vault"
+
+  test_get_open_url "onepassword_item" "https://registry.terraform.io/providers/1Password/onepassword/latest/docs/resources/item"
+
   # test_read_line_up
   test_read_line_up "tfref_test_file.tf" 0 ""
 
@@ -59,6 +63,10 @@ testing_run() {
   test_read_line_up "tfref_test_file.tf" 17 "datadog_monitor"
 
   test_read_line_up "tfref_test_file.tf" 22 "data.datadog_api_key"
+
+  test_read_line_up "tfref_test_file.tf" 25 "data.onepassword_vault"
+
+  test_read_line_up "tfref_test_file.tf" 34 "onepassword_item"
 
   # test_get_open_url_status_code
   test_get_open_url_status_code "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" 200

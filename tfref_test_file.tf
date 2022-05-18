@@ -20,3 +20,14 @@ resource "datadog_monitor" "api_alb_api_5xx_count" {
 data "datadog_api_key" "service" {
   name = "service"
 }
+
+data "onepassword_vault" "tfref" {
+  name = "tfref"
+}
+
+resource "onepassword_item" "login" {
+  vault    = data.onepassword_vault.tfref.uuid
+  title    = "tfref"
+  category = "login"
+  password = "password"
+}
